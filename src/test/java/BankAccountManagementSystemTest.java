@@ -41,20 +41,21 @@ public class BankAccountManagementSystemTest {
     // Test Case 4: Existing account, amount = 0 or balance = 0
     @Test
     public void testWithdrawAmountOrBalanceIsZero() {
-        bank.createAccount(456, 0.0); // 新建一个余额为0的账户456
-        double resultAmountZero = bank.withdraw(123, 0); // 提款金额为0
-        double resultBalanceZero = bank.withdraw(456, 10.0); // 账户余额为0
+        bank.createAccount(456, 0.0); // Create an account with number 456 and balance 0
+        double resultAmountZero = bank.withdraw(123, 0); // Withdraw amount 0
+        double resultBalanceZero = bank.withdraw(456, 10.0); // balance 0
 
         assertEquals(-3.0, resultAmountZero);
         assertEquals(-3.0, resultBalanceZero);
-        // Coverage: Statement, Branch (true branch for `else if (amount == 0 || balance == 0)`), Condition (evaluates `amount == 0` as true and `balance == 0` as true in separate tests)
+        // Coverage: Statement, Branch (true branch for `else if (amount == 0 || balance == 0)`)
+        // Those two cases will fail because the account sample cannot reach the last condition
     }
 
     // Test Case 5: Valid withdrawal (amount < balance) with a positive balance
     @Test
     public void testValidWithdrawal() {
-        double result = bank.withdraw(123, 50.0); // 提款金额小于账户余额
-        assertEquals(50.0, result); // 账户余额应该更新为50.0
+        double result = bank.withdraw(123, 50.0); // Withdraw amount less than balance
+        assertEquals(50.0, result); // Account balance updated
         // Coverage: Statement (final part of method), Branch (false branches for all `if` and `else if` statements), Condition (evaluates all conditions as false)
     }
 }
