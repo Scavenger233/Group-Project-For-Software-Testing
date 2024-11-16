@@ -2,10 +2,43 @@ import org.example.BankAccountManagementSystem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BankAccountManagementSystemTest {
 
     private BankAccountManagementSystem bank;
+
+    @BeforeEach
+    public void preCreate(){
+        //this method is to set up an account with accountNumber = 1
+        bank = new BankAccountManagementSystem();
+        bank.createAccount(1, 5.0);
+    }
+
+    @Test
+    public void testAccountExistsWithPositiveBalance(){
+        //Test requirement: The account already exists, with an initial balance that equals to 0 or is greater than 0
+        //account exists, the balance is 5.0
+        boolean result = bank.createAccount(1, 5.0);
+        assertFalse(result, "Expected result is false since the account already exists.");
+    }
+
+    @Test
+    public void testAccountNotExistsWithNegativeBalance(){
+        //Test requirement: The account does not exist, with an initial balance that is less than 0
+        //account does not exist, the balance is -5.0
+        boolean result = bank.createAccount(2, -5.0);
+        assertFalse(result, "Expected result is false since the balance is negative.");
+    }
+
+    @Test
+    public void testAccountNotExistsWithPositiveBalance(){
+        //Test requirement: The account does not exist, with an initial balance that equals to 0 or is greater than 0
+        //account does not exist, the balance is 5.0
+        boolean result = bank.createAccount(3, 5.0);
+        assertTrue(result, "Expected result is true since the account does not exist and the balance is positive.");
+    }
 
     @BeforeEach
     public void setUp() {
