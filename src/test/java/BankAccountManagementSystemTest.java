@@ -10,10 +10,11 @@ public class BankAccountManagementSystemTest {
     private BankAccountManagementSystem bank;
 
     @BeforeEach
-    public void preCreate(){
-        //this method is to set up an account with accountNumber = 1
+    public void setUp() {
         bank = new BankAccountManagementSystem();
-        bank.createAccount(1, 5.0);
+        bank.createAccount(1, 5.0);//this sets up an account with accountNumber = 1; for creatAccount method
+        bank.createAccount(123, 100.0); // Assume that there is an account already
+        bank.createAccount(456, 0.0); // Assume that there is an account already
     }
 
     @Test
@@ -40,12 +41,6 @@ public class BankAccountManagementSystemTest {
         assertTrue(result, "Expected result is true since the account does not exist and the balance is positive.");
     }
 
-    @BeforeEach
-    public void setUp() {
-        bank = new BankAccountManagementSystem();
-        bank.createAccount(123, 100.0); // Assume that there is an account already
-        bank.createAccount(456, 0.0); // Assume that there is an account already
-    }
 
     // Test Case 1: Account does not exist
     @Test
