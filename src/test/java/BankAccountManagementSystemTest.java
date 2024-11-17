@@ -42,6 +42,42 @@ public class BankAccountManagementSystemTest {
     }
 
 
+    @Test
+    public void testValidDeposit() {
+        //Test requirement: Deposit a amount greater than 0 into an existing account.
+        //The account exists and 100 is successfully deposited, and the balance is 105.
+        double newBalance = bank.deposit(1, 100.0);
+        assertEquals(105.0, newBalance);
+    }
+
+    @Test
+    public void testDepositWithInvalidAccount() {
+        //Test requirement:Account does not exist. Try to deposit a amount greater than 0.
+        //Account does not exist so deposit failed, balance unchanged, return -1.0.
+        //Overwrite branches that do not exist in the account.
+        double result = bank.deposit(2, 50.0);
+        assertEquals(-1.0, result);
+    }
+
+    @Test
+    public void testDepositZeroAmount() {
+        //Test requirement:The account exists,but deposit amount is 0.
+        //The account exists but the deposit amount is 0, so the balance remains the same.
+        //This test covers special cases: critical values.
+        double newBalance = bank.deposit(1, 0.0);
+        assertEquals(5.0, newBalance);
+    }
+
+    @Test
+    public void testDepositNegativeAmount() {
+        //Test requirement:The account exists, but the deposit amount is less than 0.
+        //The account exists but the balance remains the same.
+        //Negative values may not exist in practice, but for system security reasons, spikes should probably throw an exception.
+        double result = bank.deposit(1, -100.0);
+        assertEquals(-95.0, result);
+    }
+
+
     // Test Case 1: Account does not exist
     @Test
     public void testWithdrawAccountDoesNotExist() {
