@@ -1,9 +1,8 @@
 import org.example.BankAccountManagementSystem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BankAccountManagementSystemTest {
 
@@ -119,5 +118,51 @@ public class BankAccountManagementSystemTest {
         double result = bank.withdraw(123, 50.0); // Withdraw amount less than balance
         assertEquals(50.0, result); // Account balance updated
         // Coverage: Statement (final part of method), Branch (false branches for all `if` and `else if` statements), Condition (evaluates all conditions as false)
+    }
+
+    //Test case to check the balance of an existing account.
+    // This satisfies Requirement 4.1: Users should be able to check their account balance by providing the account number.
+
+    @Test
+    void testCheckAccountBalance_ExistingAccount() {
+        // Create a BankAccountManagementSystem object
+        BankAccountManagementSystem bank = new BankAccountManagementSystem();
+
+        // Create an account with account number 12345 and an initial balance of 500.0
+        bank.createAccount(12345, 500.0);
+
+        // Check the balance of the existing account
+        // Expectation: The balance for account 12345 should be 500.0
+        assertEquals(500.0, bank.getAccountBalance(12345), "The balance should be 500.0 for an existing account.");
+    }
+
+    //Test case to handle the scenario where the user tries to check the balance of a non-existent account.
+    //This satisfies Requirement 4.2: The system must validate that the account exists before displaying the account balance.
+    //This also satisfies Requirement 4.3: The system should display a message if the account does not exist.
+
+    @Test
+    void testCheckAccountBalance_NonExistentAccount() {
+        // Create a BankAccountManagementSystem object
+        BankAccountManagementSystem bank = new BankAccountManagementSystem();
+
+        // Try to check the balance of a non-existent account (account number 54321)
+        // Expectation: The system should throw a NullPointerException or handle it gracefully.
+        assertThrows(NullPointerException.class, () -> {
+            bank.getAccountBalance(54321);
+        }, "The account does not exist, so an exception should be thrown or a special message returned.");
+    }
+
+    //Test case to handle invalid account numbers when checking the balance.
+    //This satisfies Requirement 4.3: If an invalid account number is provided, the system should respond appropriately.
+
+    @Test
+    void testCheckAccountBalance_InvalidAccountNumber() {
+        // Create a BankAccountManagementSystem object
+        BankAccountManagementSystem bank = new BankAccountManagementSystem();
+
+        // Try to check the balance of an invalid account (account number 99999)
+        // Expectation: The system should return 0.0 or handle the invalid account case appropriately.
+        double balance = bank.getAccountBalance(99999);
+        assertEquals(0.0, balance, "The balance should be 0.0 or an error message if the account does not exist.");
     }
 }
