@@ -16,6 +16,7 @@ public class BankAccountManagementSystemTest {
         bank.createAccount(456, 0.0); // Assume that there is an account already
     }
 
+    // Create method test cases by Xiaoxuan Li
     @Test
     public void testAccountExistsWithPositiveBalance(){
         //Test requirement: The account already exists, with an initial balance that equals to 0 or is greater than 0
@@ -40,6 +41,7 @@ public class BankAccountManagementSystemTest {
         assertTrue(result, "Expected result is true since the account does not exist and the balance is positive.");
     }
 
+    // Deposit method create by Wenwen Deng
     @Test
     public void testValidDeposit() {
         //Test requirement: Deposit a amount greater than 0 into an existing account.
@@ -75,6 +77,7 @@ public class BankAccountManagementSystemTest {
         assertEquals(-95.0, result);
     }
 
+    //Withdraw method created by Yiming Li
     // Test Case 1: Account does not exist
     @Test
     public void testWithdrawAccountDoesNotExist() {
@@ -123,6 +126,7 @@ public class BankAccountManagementSystemTest {
     //Test case to check the balance of an existing account.
     // This satisfies Requirement 4.1: Users should be able to check their account balance by providing the account number.
 
+    // Get account balance method created by Kirtika
     @Test
     void testCheckAccountBalance_ExistingAccount() {
         // Create a BankAccountManagementSystem object
