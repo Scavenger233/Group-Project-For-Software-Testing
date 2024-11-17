@@ -41,7 +41,6 @@ public class BankAccountManagementSystemTest {
         assertTrue(result, "Expected result is true since the account does not exist and the balance is positive.");
     }
 
-
     @Test
     public void testValidDeposit() {
         //Test requirement: Deposit a amount greater than 0 into an existing account.
@@ -76,7 +75,6 @@ public class BankAccountManagementSystemTest {
         double result = bank.deposit(1, -100.0);
         assertEquals(-95.0, result);
     }
-
 
     // Test Case 1: Account does not exist
     @Test
